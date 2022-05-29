@@ -1,7 +1,10 @@
 package ch.egli.kitmoderator.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -22,5 +25,9 @@ public class Kita extends Persistent {
 
 	@Column
 	private String zip;
+
+	@OneToMany(mappedBy="kita")
+	List<Child> children;
+
 
 }

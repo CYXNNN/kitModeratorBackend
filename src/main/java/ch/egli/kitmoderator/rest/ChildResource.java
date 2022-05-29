@@ -3,8 +3,8 @@ package ch.egli.kitmoderator.rest;
 import java.util.Date;
 import java.util.UUID;
 
-import ch.egli.kitmoderator.model.Kita;
-import ch.egli.kitmoderator.repo.KitaRepository;
+import ch.egli.kitmoderator.model.Child;
+import ch.egli.kitmoderator.repo.ChildRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.stereotype.Controller;
@@ -15,25 +15,25 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("api/v1/kita")
-public class KitaResource {
+@RequestMapping("api/v1/child")
+public class ChildResource {
 
 	@Autowired
-	private KitaRepository repo;
+	ChildRepository repo;
 
 	@PostMapping("/")
-	public HttpEntity<Kita> createKita(@RequestBody Kita kita) {
-		kita.setId(UUID.randomUUID().toString());
-		kita.setCreated(new Date());
-		kita.setUpdated(new Date());
-		var saved = repo.save(kita);
+	public HttpEntity<Child> createChild(@RequestBody Child child) {
+		child.setId(UUID.randomUUID().toString());
+		child.setCreated(new Date());
+		child.setUpdated(new Date());
+		var saved = repo.save(child);
 		return new HttpEntity<>(saved);
 	}
 
 	@GetMapping("/{identifier}")
-	public HttpEntity<Kita> get(@PathVariable("identifier") String id) {
-		var kita = repo.findById(id).orElseThrow(() -> new NullPointerException("kita not found"));
-		return new HttpEntity<>(kita);
+	public HttpEntity<Child> get(@PathVariable("identifier") String id) {
+		var child = repo.findById(id).orElseThrow(() -> new NullPointerException("child not found"));
+		return new HttpEntity<>(child);
 	}
 
 }
