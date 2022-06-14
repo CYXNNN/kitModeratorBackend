@@ -8,6 +8,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -39,6 +40,7 @@ public class Child extends Persistent{
 
 	@ManyToOne
 	@JoinColumn(name="kita_id")
+	@JsonIgnore
 	private Kita kita;
 
 }
