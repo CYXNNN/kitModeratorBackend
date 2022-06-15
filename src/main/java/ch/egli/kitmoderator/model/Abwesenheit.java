@@ -2,10 +2,12 @@ package ch.egli.kitmoderator.model;
 
 import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -14,32 +16,23 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-public class Child extends Persistent{
+public class Abwesenheit extends Persistent{
 
 	@Column
-	private String name;
+	private String reason;
 
 	@Column
-	private String lastname;
+	private Date fromDate;
 
 	@Column
-	private Date birthdate;
-
-	@Column
-	private String street;
-
-	@Column
-	private String city;
-
-	@Column
-	private String zip;
+	private Date toDate;
 
 	@Column
 	private String owner;
 
 	@ManyToOne
-	@JoinColumn(name="kita_id")
+	@JoinColumn(name="abwesenheit_id")
 	@JsonIgnore
-	private Kita kita;
+	private Abwesenheit abwesenheit;
 
 }

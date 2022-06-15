@@ -1,5 +1,6 @@
 package ch.egli.kitmoderator.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -28,7 +29,14 @@ public class Kita extends Persistent {
 	private String zip;
 
 	@OneToMany(mappedBy="kita")
-	List<Child> children;
+	List<Child> children = new ArrayList<>();
+
+	@OneToMany(mappedBy="abwesenheit")
+	List<Abwesenheit> abwesenheiten = new ArrayList<>();
+
+	public void addChild(Child child) {
+		this.children.add(child);
+	}
 
 
 }
