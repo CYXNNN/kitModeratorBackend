@@ -36,16 +36,15 @@ public class ChildResource {
 		child.setId(UUID.randomUUID().toString());
 		child.setCreated(new Date());
 		child.setUpdated(new Date());
-		var saved = repo.save(child);
+		Child saved = repo.save(child);
 		return new HttpEntity<>(saved);
 	}
 
 	@GetMapping("/all")
 	@CrossOrigin("http://localhost:8100")
 	public HttpEntity<List<Child>> getAll() {
-		var res = repo.findAll();
-		var result =
-				StreamSupport.stream(res.spliterator(), false)
+		List<Child> result =
+				StreamSupport.stream(repo.findAll().spliterator(), false)
 						.collect(Collectors.toList());
 		return new HttpEntity<>(result);
 	}
@@ -53,7 +52,7 @@ public class ChildResource {
 	@GetMapping("/{identifier}")
 	@CrossOrigin("http://localhost:8100")
 	public HttpEntity<Child> get(@PathVariable("identifier") String id) {
-		var child = repo.findById(id).orElseThrow(() -> new NullPointerException("child not found"));
+		Child child = repo.findById(id).orElseThrow(() -> new NullPointerException("child not found"));
 		return new HttpEntity<>(child);
 	}
 
@@ -61,7 +60,7 @@ public class ChildResource {
 	@CrossOrigin("http://localhost:8100")
 	public void samples() {
 
-		var kita = new Kita();
+		Kita kita = new Kita();
 
 		kita.setId(UUID.randomUUID().toString());
 		kita.setCreated(new Date());
@@ -73,7 +72,7 @@ public class ChildResource {
 
 		kitaRepo.save(kita);
 
-		var child = new Child();
+		Child child = new Child();
 		child.setId(UUID.randomUUID().toString());
 		child.setCreated(new Date());
 		child.setUpdated(new Date());
@@ -89,7 +88,7 @@ public class ChildResource {
 		repo.save(child);
 
 
-		var child2 = new Child();
+		Child child2 = new Child();
 		child2.setId(UUID.randomUUID().toString());
 		child2.setCreated(new Date());
 		child2.setUpdated(new Date());

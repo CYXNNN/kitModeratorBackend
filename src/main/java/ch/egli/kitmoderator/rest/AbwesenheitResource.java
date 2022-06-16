@@ -33,16 +33,15 @@ public class AbwesenheitResource {
 		abwesenheit.setId(UUID.randomUUID().toString());
 		abwesenheit.setCreated(new Date());
 		abwesenheit.setUpdated(new Date());
-		var saved = repo.save(abwesenheit);
+		Abwesenheit saved = repo.save(abwesenheit);
 		return new HttpEntity<>(saved);
 	}
 
 	@GetMapping("/all")
 	@CrossOrigin("http://localhost:8100")
 	public HttpEntity<List<Abwesenheit>> getAll() {
-		var res = repo.findAll();
-		var result =
-				StreamSupport.stream(res.spliterator(), false)
+		List<Abwesenheit> result =
+				StreamSupport.stream( repo.findAll().spliterator(), false)
 						.collect(Collectors.toList());
 		return new HttpEntity<>(result);
 	}

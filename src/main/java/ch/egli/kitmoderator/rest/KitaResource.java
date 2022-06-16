@@ -28,14 +28,14 @@ public class KitaResource {
 		kita.setId(UUID.randomUUID().toString());
 		kita.setCreated(new Date());
 		kita.setUpdated(new Date());
-		var saved = repo.save(kita);
+		Kita saved = repo.save(kita);
 		return new HttpEntity<>(saved);
 	}
 
 	@GetMapping("/{identifier}")
 	@CrossOrigin("http://localhost:8100")
 	public HttpEntity<Kita> get(@PathVariable("identifier") String id) {
-		var kita = repo.findById(id).orElseThrow(() -> new NullPointerException("kita not found"));
+		Kita kita = repo.findById(id).orElseThrow(() -> new NullPointerException("kita not found"));
 		return new HttpEntity<>(kita);
 	}
 
