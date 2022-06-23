@@ -40,9 +40,8 @@ public class AbwesenheitResource {
 	@GetMapping("/all")
 	@CrossOrigin({"http://localhost:8100", "http://localhost"})
 	public HttpEntity<List<Abwesenheit>> getAll() {
-		Iterable<Abwesenheit> res = repo.findAll();
 		List<Abwesenheit> result =
-				StreamSupport.stream(res.spliterator(), false)
+				StreamSupport.stream( repo.findAll().spliterator(), false)
 						.collect(Collectors.toList());
 		return new HttpEntity<>(result);
 	}

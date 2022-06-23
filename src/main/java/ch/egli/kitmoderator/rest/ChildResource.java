@@ -43,9 +43,8 @@ public class ChildResource {
 	@GetMapping("/all")
 	@CrossOrigin({"http://localhost:8100", "http://localhost"})
 	public HttpEntity<List<Child>> getAll() {
-		Iterable<Child> res = repo.findAll();
 		List<Child> result =
-				StreamSupport.stream(res.spliterator(), false)
+				StreamSupport.stream(repo.findAll().spliterator(), false)
 						.collect(Collectors.toList());
 		return new HttpEntity<>(result);
 	}
