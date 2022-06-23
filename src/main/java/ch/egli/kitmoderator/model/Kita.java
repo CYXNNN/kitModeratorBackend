@@ -31,9 +31,6 @@ public class Kita extends Persistent {
 	@OneToMany(mappedBy="kita")
 	List<Child> children = new ArrayList<>();
 
-	@OneToMany(mappedBy="abwesenheit")
-	List<Abwesenheit> abwesenheiten = new ArrayList<>();
-
 	public void addChild(Child child) {
 		this.children.add(child);
 	}

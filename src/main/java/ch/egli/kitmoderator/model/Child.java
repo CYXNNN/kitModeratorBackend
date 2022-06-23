@@ -1,11 +1,14 @@
 package ch.egli.kitmoderator.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
@@ -35,11 +38,15 @@ public class Child extends Persistent{
 	private String zip;
 
 	@Column
-	private String owner;
+	private String owner = "parental-identifier";
 
 	@ManyToOne
 	@JoinColumn(name="kita_id")
 	@JsonIgnore
 	private Kita kita;
+
+	@OneToMany(mappedBy="child")
+	@JsonIgnore
+	List<Abwesenheit> abwesenheiten = new ArrayList<>();
 
 }

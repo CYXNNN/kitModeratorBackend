@@ -22,17 +22,19 @@ public class Abwesenheit extends Persistent{
 	private String reason;
 
 	@Column
+	private String comment;
+
+	@Column
 	private Date fromDate;
 
 	@Column
 	private Date toDate;
 
 	@Column
-	private String owner;
+	private String owner = "parental-identifier";
 
 	@ManyToOne
-	@JoinColumn(name="abwesenheit_id")
-	@JsonIgnore
-	private Abwesenheit abwesenheit;
+	@JoinColumn(name="child_id")
+	private Child child;
 
 }

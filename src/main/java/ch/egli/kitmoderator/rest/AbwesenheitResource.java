@@ -28,20 +28,20 @@ public class AbwesenheitResource {
 	AbwesenheitRepository repo;
 
 	@PostMapping("/")
-	@CrossOrigin("http://localhost:8100")
+	@CrossOrigin({"http://localhost:8100", "http://localhost"})
 	public HttpEntity<Abwesenheit> createAbwesenheit(@RequestBody Abwesenheit abwesenheit) {
 		abwesenheit.setId(UUID.randomUUID().toString());
 		abwesenheit.setCreated(new Date());
 		abwesenheit.setUpdated(new Date());
-		var saved = repo.save(abwesenheit);
+		Abwesenheit saved = repo.save(abwesenheit);
 		return new HttpEntity<>(saved);
 	}
 
 	@GetMapping("/all")
-	@CrossOrigin("http://localhost:8100")
+	@CrossOrigin({"http://localhost:8100", "http://localhost"})
 	public HttpEntity<List<Abwesenheit>> getAll() {
-		var res = repo.findAll();
-		var result =
+		Iterable<Abwesenheit> res = repo.findAll();
+		List<Abwesenheit> result =
 				StreamSupport.stream(res.spliterator(), false)
 						.collect(Collectors.toList());
 		return new HttpEntity<>(result);
