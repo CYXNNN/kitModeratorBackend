@@ -31,7 +31,7 @@ public class ChildResource {
 	KitaRepository kitaRepo;
 
 	@PostMapping("/")
-	@CrossOrigin("http://localhost:8100")
+	@CrossOrigin
 	public HttpEntity<Child> createChild(@RequestBody Child child) {
 		child.setId(UUID.randomUUID().toString());
 		child.setCreated(new Date());
@@ -41,7 +41,7 @@ public class ChildResource {
 	}
 
 	@GetMapping("/all")
-	@CrossOrigin({"http://localhost:8100", "http://localhost"})
+	@CrossOrigin
 	public HttpEntity<List<Child>> getAll() {
 		List<Child> result =
 				StreamSupport.stream(repo.findAll().spliterator(), false)
@@ -50,14 +50,14 @@ public class ChildResource {
 	}
 
 	@GetMapping("/{identifier}")
-	@CrossOrigin({"http://localhost:8100", "http://localhost"})
+	@CrossOrigin
 	public HttpEntity<Child> get(@PathVariable("identifier") String id) {
 		Child child = repo.findById(id).orElseThrow(() -> new NullPointerException("child not found"));
 		return new HttpEntity<>(child);
 	}
 
 	@GetMapping("/samples")
-	@CrossOrigin({"http://localhost:8100", "http://localhost"})
+	@CrossOrigin
 	public void samples() {
 
 		Kita kita = new Kita();

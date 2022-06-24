@@ -28,7 +28,7 @@ public class AbwesenheitResource {
 	AbwesenheitRepository repo;
 
 	@PostMapping("/")
-	@CrossOrigin({"http://localhost:8100", "http://localhost"})
+	@CrossOrigin
 	public HttpEntity<Abwesenheit> createAbwesenheit(@RequestBody Abwesenheit abwesenheit) {
 		abwesenheit.setId(UUID.randomUUID().toString());
 		abwesenheit.setCreated(new Date());
@@ -38,7 +38,7 @@ public class AbwesenheitResource {
 	}
 
 	@GetMapping("/all")
-	@CrossOrigin({"http://localhost:8100", "http://localhost"})
+	@CrossOrigin
 	public HttpEntity<List<Abwesenheit>> getAll() {
 		List<Abwesenheit> result =
 				StreamSupport.stream( repo.findAll().spliterator(), false)

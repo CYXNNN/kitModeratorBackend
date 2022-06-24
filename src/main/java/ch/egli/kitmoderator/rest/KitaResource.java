@@ -23,7 +23,7 @@ public class KitaResource {
 	private KitaRepository repo;
 
 	@PostMapping("/")
-	@CrossOrigin({"http://localhost:8100", "http://localhost"})
+	@CrossOrigin
 	public HttpEntity<Kita> createKita(@RequestBody Kita kita) {
 		kita.setId(UUID.randomUUID().toString());
 		kita.setCreated(new Date());
@@ -33,7 +33,7 @@ public class KitaResource {
 	}
 
 	@GetMapping("/{identifier}")
-	@CrossOrigin({"http://localhost:8100", "http://localhost"})
+	@CrossOrigin
 	public HttpEntity<Kita> get(@PathVariable("identifier") String id) {
 		Kita kita = repo.findById(id).orElseThrow(() -> new NullPointerException("kita not found"));
 		return new HttpEntity<>(kita);
