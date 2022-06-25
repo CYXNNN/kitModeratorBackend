@@ -1,5 +1,6 @@
 package ch.egli.kitmoderator.rest;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -8,6 +9,7 @@ import java.util.stream.StreamSupport;
 
 import ch.egli.kitmoderator.dto.AbwesenheitCreateDto;
 import ch.egli.kitmoderator.model.Abwesenheit;
+import ch.egli.kitmoderator.model.Child;
 import ch.egli.kitmoderator.repo.AbwesenheitRepository;
 import ch.egli.kitmoderator.repo.ChildRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,7 +44,10 @@ public class AbwesenheitResource {
 		abwesenheit.setFromDate(dto.fromDate);
 		abwesenheit.setToDate(dto.toDate);
 
-		abwesenheit.setChild(childRepo.findById(dto.childId).orElseThrow(NullPointerException::new));
+		List<Child> children = Arrays.stream(dto.childrenIds).map(id -> childRepo.findById(id).orElseThrow(NullPointerException::new))
+				.collect(Collectors.toList());
+
+		abwesenheit.setChildren(children);
 
 		Abwesenheit saved = repo.save(abwesenheit);
 		return new HttpEntity<>(saved);
