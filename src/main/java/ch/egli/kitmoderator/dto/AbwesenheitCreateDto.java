@@ -8,6 +8,7 @@ import ch.egli.kitmoderator.model.Persistent;
 
 public class AbwesenheitCreateDto {
 
+	public AbwesenheitCreateDto(){}
 
 	public AbwesenheitCreateDto(Abwesenheit a) {
 		this.id = a.getId();
