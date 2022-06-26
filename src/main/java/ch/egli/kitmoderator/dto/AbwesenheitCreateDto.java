@@ -8,7 +8,9 @@ import ch.egli.kitmoderator.model.Persistent;
 
 public class AbwesenheitCreateDto {
 
-	public AbwesenheitCreateDto(){}
+	public AbwesenheitCreateDto(){
+
+	}
 
 	public AbwesenheitCreateDto(Abwesenheit a) {
 		this.id = a.getId();
@@ -17,12 +19,17 @@ public class AbwesenheitCreateDto {
 		this.reason = a.getReason();
 		this.comment = a.getComment();
 
+		this.created = a.getCreated();
+		this.updated = a.getUpdated();
+
 		this.children = a.getChildren().stream()
 				.map(Persistent::getId)
 				.toArray(String[]::new);
 	}
 
 	public String id;
+	public Date created;
+	public Date updated;
 
 	public Date fromDate;
 	public Date toDate;
