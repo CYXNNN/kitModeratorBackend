@@ -34,7 +34,7 @@ public class AbwesenheitResource {
 
 	@PostMapping("/")
 	@CrossOrigin
-	public HttpEntity<Abwesenheit> createAbwesenheit(@RequestBody AbwesenheitCreateDto dto) {
+	public HttpEntity<AbwesenheitCreateDto> createAbwesenheit(@RequestBody AbwesenheitCreateDto dto) {
 		Abwesenheit abwesenheit = new Abwesenheit();
 		abwesenheit.setId(UUID.randomUUID().toString());
 		abwesenheit.setCreated(new Date());
@@ -53,7 +53,7 @@ public class AbwesenheitResource {
 		abwesenheit.setStatus(AbwesenheitStatus.PENDING);
 
 		Abwesenheit saved = repo.save(abwesenheit);
-		return new HttpEntity<>(saved);
+		return new HttpEntity<>(new AbwesenheitCreateDto(saved));
 	}
 
 	@GetMapping("/all")
