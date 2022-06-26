@@ -9,6 +9,7 @@ import java.util.stream.StreamSupport;
 
 import ch.egli.kitmoderator.dto.AbwesenheitCreateDto;
 import ch.egli.kitmoderator.model.Abwesenheit;
+import ch.egli.kitmoderator.model.AbwesenheitStatus;
 import ch.egli.kitmoderator.model.Child;
 import ch.egli.kitmoderator.repo.AbwesenheitRepository;
 import ch.egli.kitmoderator.repo.ChildRepository;
@@ -48,6 +49,8 @@ public class AbwesenheitResource {
 				.collect(Collectors.toList());
 
 		abwesenheit.setChildren(children);
+
+		abwesenheit.setStatus(AbwesenheitStatus.PENDING);
 
 		Abwesenheit saved = repo.save(abwesenheit);
 		return new HttpEntity<>(saved);
