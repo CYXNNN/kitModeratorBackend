@@ -58,9 +58,10 @@ public class AbwesenheitResource {
 
 	@GetMapping("/all")
 	@CrossOrigin
-	public HttpEntity<List<Abwesenheit>> getAll() {
-		List<Abwesenheit> result =
+	public HttpEntity<List<AbwesenheitCreateDto>> getAll() {
+		List<AbwesenheitCreateDto> result =
 				StreamSupport.stream( repo.findAll().spliterator(), false)
+						.map(AbwesenheitCreateDto::new)
 						.collect(Collectors.toList());
 		return new HttpEntity<>(result);
 	}
