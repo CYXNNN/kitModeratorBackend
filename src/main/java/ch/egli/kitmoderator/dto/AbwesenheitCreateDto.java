@@ -9,5 +9,5 @@ public class AbwesenheitCreateDto {
 	public String reason;
 	public String comment;
 
-	public String[] childrenIds;
+	public String[] children;
 }

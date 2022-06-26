@@ -44,7 +44,7 @@ public class AbwesenheitResource {
 		abwesenheit.setFromDate(dto.fromDate);
 		abwesenheit.setToDate(dto.toDate);
 
-		List<Child> children = Arrays.stream(dto.childrenIds).map(id -> childRepo.findById(id).orElseThrow(NullPointerException::new))
+		List<Child> children = Arrays.stream(dto.children).map(id -> childRepo.findById(id).orElseThrow(NullPointerException::new))
 				.collect(Collectors.toList());
 
 		abwesenheit.setChildren(children);
