@@ -1,5 +1,6 @@
 package ch.egli.kitmoderator.model;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -27,10 +28,10 @@ public class Abwesenheit extends Persistent{
 	private String comment;
 
 	@Column
-	private Date fromDate;
+	private LocalDateTime fromDate;
 
 	@Column
-	private Date toDate;
+	private LocalDateTime toDate;
 
 	@Column
 	@Enumerated(EnumType.STRING)

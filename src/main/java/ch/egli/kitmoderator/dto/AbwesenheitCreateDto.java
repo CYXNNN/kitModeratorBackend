@@ -1,5 +1,6 @@
 package ch.egli.kitmoderator.dto;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.stream.Collectors;
 
@@ -31,8 +32,8 @@ public class AbwesenheitCreateDto {
 	public Date created;
 	public Date updated;
 
-	public Date fromDate;
-	public Date toDate;
+	public LocalDateTime fromDate;
+	public LocalDateTime toDate;
 
 	public String reason;
 	public String comment;
