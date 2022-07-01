@@ -86,10 +86,10 @@ public class AbwesenheitResource {
 
 	@DeleteMapping("/{id}")
 	@CrossOrigin
-	public HttpStatus delete(@PathVariable("id") String id) {
+	public HttpEntity<HttpStatus> delete(@PathVariable("id") String id) {
 
 		repo.deleteById(id);
-		return HttpStatus.OK;
+		return new HttpEntity<>(HttpStatus.OK);
 	}
 
 	@GetMapping("/all")
