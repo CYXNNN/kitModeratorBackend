@@ -15,10 +15,14 @@ import ch.egli.kitmoderator.repo.AbwesenheitRepository;
 import ch.egli.kitmoderator.repo.ChildRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -54,6 +58,38 @@ public class AbwesenheitResource {
 
 		Abwesenheit saved = repo.save(abwesenheit);
 		return new HttpEntity<>(new AbwesenheitCreateDto(saved));
+	}
+
+	@PutMapping("/")
+	@CrossOrigin
+	public HttpEntity<AbwesenheitCreateDto> put(@RequestBody AbwesenheitCreateDto dto) {
+
+		Abwesenheit present = repo.findById(dto.id).orElseThrow(NullPointerException::new);
+
+
+		present.setUpdated(new Date());
+
+		present.setComment(dto.comment);
+		present.setReason(dto.reason);
+		present.setFromDate(dto.fromDate);
+		present.setToDate(dto.toDate);
+
+		List<Child> children = Arrays.stream(dto.children).map(id -> childRepo.findById(id).orElseThrow(NullPointerException::new))
+				.collect(Collectors.toList());
+
+		present.setChildren(children);
+		present.setStatus(AbwesenheitStatus.PENDING);
+
+		Abwesenheit saved = repo.save(present);
+		return new HttpEntity<>(new AbwesenheitCreateDto(present));
+	}
+
+	@DeleteMapping("/{id}")
+	@CrossOrigin
+	public HttpStatus delete(@PathVariable("id") String id) {
+
+		repo.deleteById(id);
+		return HttpStatus.OK;
 	}
 
 	@GetMapping("/all")
